@@ -266,9 +266,15 @@ function searchPlaces(keywordFromHero) {
     const name = (card.dataset.name || '').toLowerCase();
     const place = typeof PLACES !== 'undefined' ? getPlaceById(card.dataset.id) : null;
     const cardCategory = place ? place.category : '';
-    const nameMatch = keyword === '' || name.includes(keyword);
+    const cardShort = place ? place.short.toLowerCase() : '';
+    const cardProvince = place ? place.province.toLowerCase() : '';
+    const keywordMatch = keyword === ''
+      || name.includes(keyword)
+      || cardCategory.toLowerCase().includes(keyword)
+      || cardShort.includes(keyword)
+      || cardProvince.includes(keyword);
     const categoryMatch = category === '' || cardCategory.includes(category);
-    const match = nameMatch && categoryMatch;
+    const match = keywordMatch && categoryMatch;
     card.style.display = match ? '' : 'none';
     if (match) found++;
   });
