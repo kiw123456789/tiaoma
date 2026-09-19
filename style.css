@@ -6,11 +6,23 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+html {
+  height: 100%;
+}
+
 body {
   font-family: "Segoe UI", "Tahoma", sans-serif;
   background: #f7f7f5;
   color: #2b2b2b;
   line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ผลักให้ footer อยู่ล่างสุดของหน้าจอเสมอ แม้เนื้อหาจะน้อย */
+main {
+  flex: 1 0 auto;
 }
 
 a { text-decoration: none; color: inherit; }
@@ -28,6 +40,29 @@ header.site-header {
   position: sticky;
   top: 0;
   z-index: 100;
+}
+
+header.site-header.header-minimal {
+  justify-content: center;
+  padding: 22px 40px;
+  background: linear-gradient(180deg, #ffffff 0%, #f2faf7 100%);
+  box-shadow: none;
+  position: relative;
+}
+header.site-header.header-minimal .logo {
+  font-size: 1.8rem;
+  letter-spacing: 0.5px;
+}
+header.site-header.header-minimal::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #0e7c66, #f2a900);
 }
 
 .logo {
@@ -117,7 +152,7 @@ nav.main-nav a.active {
   text-align: center;
   padding: 60px 20px;
   color: #fff;
-  background: url("image/พื้นหลัง6.jpg");
+  background: url("image/hero-bg.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -128,20 +163,22 @@ nav.main-nav a.active {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 15% 80%, rgba(255,255,255,0.12) 0, transparent 40%),
-    radial-gradient(circle at 85% 20%, rgba(255,255,255,0.10) 0, transparent 35%);
+    linear-gradient(180deg, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.55) 100%),
+    radial-gradient(circle at 15% 80%, rgba(255,255,255,0.10) 0, transparent 40%),
+    radial-gradient(circle at 85% 20%, rgba(255,255,255,0.08) 0, transparent 35%);
 }
 .hero h2 {
   font-size: 2.4rem;
   margin-bottom: 10px;
   position: relative;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.85), 0 4px 18px rgba(0,0,0,0.6);
 }
 .hero p {
   max-width: 600px;
   margin: 0 auto 25px auto;
-  opacity: 0.95;
+  opacity: 0.98;
   position: relative;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8), 0 2px 12px rgba(0,0,0,0.5);
 }
 .hero .hero-search {
   position: relative;
@@ -177,6 +214,7 @@ nav.main-nav a.active {
 /* ===================== Page container / sections ===================== */
 main {
   max-width: 1100px;
+  width: 100%;
   margin: 0 auto;
   padding: 40px 20px;
 }
@@ -276,6 +314,13 @@ main {
   border-radius: 8px;
   background: linear-gradient(135deg, #48b89b, #0e7c66);
   flex-shrink: 0;
+  overflow: hidden;
+}
+.article-item .thumb-sm img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 .article-item .content { flex: 1; min-width: 200px; }
 .article-item h3 { color: #222; margin-bottom: 6px; }
@@ -375,6 +420,7 @@ footer.site-footer {
   color: #ccc;
   padding: 30px 20px 20px;
   margin-top: 40px;
+  flex-shrink: 0;
 }
 .footer-inner {
   max-width: 1100px;
